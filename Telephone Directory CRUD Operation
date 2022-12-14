@@ -2,69 +2,53 @@ import pymongo
 !apt install mongodb >log
 !service mongodb start
 from pymongo import MongoClient
-myclient = MongoClient()
+client = MongoClient()
 
-all_databases = myclient.list_database_names()
+db = client
+db = client['Telephone_Directory']
+
+my_collection =db['ids']
+
+my_collection.insert_one({"name" : "mano" , "place" : "chennai" , "contact_no" : 9584758988})
+
+data = [{"id" : 1, "name" : "mano" , "phone" : 9856321475 , "place" : "mumbai"},
+        {"id" : 2, "name" : "raju" , "phone" : 9863214785 , "place" : "chennai"},
+        {"id" : 3, "name" : "sugi" , "phone" : 9832145874 , "place" : "bangalore"},
+        {"id" : 4, "name" : "sunil" , "phone" : 7854125478 , "place" : "chennai"}]
+        
+my_collection.insert_many(data)
+
+all_databases = Client.list_database_names()
 print(all_databases)
 
-mydatabase = myclient['Telephone_Directory']
-
-
-id = mydatabase['id']
-
-all_collections = mydatabase.list_collection_names()
+all_collections = db.list_collection_names()
 print(all_collections)
 
-ids = [
-    {
-        "id": 1,
-        "name": "Andrés Trump",
-        "phone": "+52 461 111 1111",
-        "place": "mumbai"
-    },
-    {
-        "id": 2,
-        "name": "Margarita Clinton",
-        "phone": "+52 461 111 2233",
-        "place": "bangalore"
-    },
-    {
-        "id": 3,
-        "name": "Donald John López Obrador",
-        "phone": "+632563255"
-        "place": "chennai"
-    }
-]
+for i in my_collection({},{'_id':0}):
+    print(i)
 
-all_databases = myClient.list_database_names()
-print(all_databases)
+Q = {"name" : "mano"}
+New = {"$set" :{"place" : "salem"}
 
-all_collections = mydatabase.list_collection_names()
-print(all_collections)
+my_collection.update_one(Q,New)
+for i in my_collection.find({},{_"id":0):
+    print(i)
+    
+my_collection.update_many(Q,New)
+for i in my_collection.find({},{_"id":0):
+    print(i)
 
-for document in id.find():
-    print(document)
-   
-for document in id.find({},{'_id':0}):
-    print(document)
-
-id.delete_one({'name': 'Andrés Trump'})
-for document in id.find({},{'_id':0}):
-  print(document)
+my_collection.delete_one({"name":"mano"})
+for i in my_collection():
+    print(i)
   
-id.delete_many({'name': 'Andrés Trump'})
-for document in id.find({},{'_id':0}):
-  print(document)
+my_collection.delete_many()
+for i in my_collection():
+    print(i)
   
 id.delete_one({})
 for document in id.find({},{'_id':0}).sort("phone"):
   print(document)
 
-#id.update_one({old_data},{new_data})
-
-id.update_one({"name": "Andrés Trump"},{"$set":{"name": "Andrés sham"}})
-for document in id.find({},{'_id':0}):
-  print(document)
-
-for document in id.find().limit(1):
-  print(document)
+for i in my_collection().limit(1):
+  print(collection)
