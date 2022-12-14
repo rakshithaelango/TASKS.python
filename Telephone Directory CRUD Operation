@@ -1,0 +1,70 @@
+import pymongo
+!apt install mongodb >log
+!service mongodb start
+from pymongo import MongoClient
+myclient = MongoClient()
+
+all_databases = myclient.list_database_names()
+print(all_databases)
+
+mydatabase = myclient['Telephone_Directory']
+
+
+id = mydatabase['id']
+
+all_collections = mydatabase.list_collection_names()
+print(all_collections)
+
+ids = [
+    {
+        "id": 1,
+        "name": "Andrés Trump",
+        "phone": "+52 461 111 1111",
+        "place": "mumbai"
+    },
+    {
+        "id": 2,
+        "name": "Margarita Clinton",
+        "phone": "+52 461 111 2233",
+        "place": "bangalore"
+    },
+    {
+        "id": 3,
+        "name": "Donald John López Obrador",
+        "phone": "+632563255"
+        "place": "chennai"
+    }
+]
+
+all_databases = myClient.list_database_names()
+print(all_databases)
+
+all_collections = mydatabase.list_collection_names()
+print(all_collections)
+
+for document in id.find():
+    print(document)
+   
+for document in id.find({},{'_id':0}):
+    print(document)
+
+id.delete_one({'name': 'Andrés Trump'})
+for document in id.find({},{'_id':0}):
+  print(document)
+  
+id.delete_many({'name': 'Andrés Trump'})
+for document in id.find({},{'_id':0}):
+  print(document)
+  
+id.delete_one({})
+for document in id.find({},{'_id':0}).sort("phone"):
+  print(document)
+
+#id.update_one({old_data},{new_data})
+
+id.update_one({"name": "Andrés Trump"},{"$set":{"name": "Andrés sham"}})
+for document in id.find({},{'_id':0}):
+  print(document)
+
+for document in id.find().limit(1):
+  print(document)
