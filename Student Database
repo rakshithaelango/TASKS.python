@@ -1,0 +1,41 @@
+!pip install pymongo
+
+from pymongo import MongoClient
+client =  MongoClient("mongodb+srv://Rakshitha:Rakshithae@cluster0.im5q9u3.mongodb.net/?retryWrites=true&w=majority")
+client.list_database_names()
+
+db = client
+db = client["File"]
+my_collection =db['studentdatabase']
+
+import json
+
+for i in  my_collection.find():
+  print(i)
+  
+from google.colab import drive
+drive.mount('/content/drive')
+
+for i in open("students.json","r"):
+  print(i)
+  
+from pprint import pprint
+for i in my_collection.find():
+  pprint(i)
+  
+stage1 ={"$unwind":"$scores"}
+for i in my_collection.aggreate([stage1]):
+  pprint(i)
+  
+stage1 ={"$unwind":"$scores"}
+stage2 = {"$group":{"_id":"$scores.type"},"avg_scores":{"$avg":"$scores.score"}}}
+for i in my_cofor i in my_collection.aggreate([stage1,stage2]):
+  pprint(i)
+  
+stage1 ={"$unwind":"$scores"}
+stage2 = {$"match":{"scores.type":"quiz"}}
+stage3 = {"$sort": {"$scores.score":-1}}
+stage4 = {"$limit":3}
+stage5 = {"$project":{"_id":0,"name":1,"scores.score":1}}
+for i in my_collection.aggreate([stage1,stage2,stage3,stage4,stage5]):
+  pprint(i)
