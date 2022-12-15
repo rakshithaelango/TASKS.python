@@ -26,7 +26,19 @@ print(all_collections)
 
 for i in my_collection({},{'_id':0}):
     print(i)
+    
+client = MongoClient
+db = client
+db = client['Telephone_Directory']
 
+query = { "name": "mano" }
+
+mydoc = myc_collection.find(myquery)
+
+for x in mydoc:
+  print(x)
+  
+  
 Q = {"name" : "mano"}
 New = {"$set" :{"place" : "salem"}
 
@@ -49,6 +61,12 @@ for i in my_collection():
 id.delete_one({})
 for document in id.find({},{'_id':0}).sort("phone"):
   print(document)
+  
+
+db = client["db"]
+my_collection = db["telephone directory"]
+mycol.drop()
+
 
 for i in my_collection().limit(1):
   print(collection)
