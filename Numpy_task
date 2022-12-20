@@ -92,14 +92,146 @@
          print (np.unravel_index(100, (6,7,8)))
 
 #21 Create a checkerboard 8x8 matrix using the tile function
+         Z = np.tile( np.array([[0,1],[1,0]]), (4,4))
+         print(Z)
+
+#22 Normalize a 5x5 random matrix
+        a=np.random.random((5,5))
+        a_min,a_max=a.min(),a.max()
+        normalize=(a-a_min)/(a_max-a_min)
+        print(normalize)
+        
+#23 Create a custom dtype that describes a color as four unsigned bytes (RGBA)
+                  color = np.dtype([("r", np.ubyte, 1),
+                  ("g", np.ubyte, 1),
+                  ("b", np.ubyte, 1),
+                  ("a", np.ubyte, 1)])
+
+#24 Multiply a 5x3 matrix by a 3x2 matrix (real matrix product)
+         x=np.dot(np.ones((5,3)),np.ones((3,2)))
+         print(x)       
+ 
+#25 Given a 1D array, negate all elements which are between 3 and 8, in place.
+          Z = np.arange(11)
+          Z[(3 < Z) & (Z <= 8)] *= -1
+          print(Z)
+     
+#26  What is the output of the following script?
+        print(sum(range(5),-1))
+        from numpy import *
+        print(sum(range(5),-1))
+OUTPUT = 9
+         10
+
+#27  Consider an integer vector Z, which of these expressions are legal? 
+       (2 << Z >> 2)
+       (Z <- Z)
+       (1j*Z)
+       (Z/1/1)
+       (Z<Z>Z)
+
+#28 What are the result of the following expressions
+       np.array(0) / np.array(0)
+       np.array(0) // np.array(0)
+       np.array([np.nan]).astype(int).astype(float)
+RESULT = <ipython-input-51-cd809174da5d>:1: RuntimeWarning: invalid value encountered in true_divide
+  np.array(0) / np.array(0)
+<ipython-input-51-cd809174da5d>:2: RuntimeWarning: divide by zero encountered in floor_divide
+  np.array(0) // np.array(0)
+array([-9.22337204e+18])
+
+#29 How to round away from zero a float array ?
+      a = np.random.uniform(-10,+10,10)
+      print (np.copysign(np.ceil(np.abs(a)), a))
+
+#30 How to find common values between two arrays?
+     a = np.random.randint(0,10,10)
+     b = np.random.randint(0,10,10)
+     print(np.intersect1d(a,b))  
+     
+#31  How to ignore all numpy warnings (not recommended)? 
 
 
+#32 Is the following expressions true?
+    np.sqrt(-1) == np.emath.sqrt(-1) 
+RESULT = False 
 
+#33 How to get the dates of yesterday, today and tomorrow?
+     print(np.datetime64)
+  OUTPUT = <class 'numpy.datetime64'>
 
+#34 How to get all the dates corresponding to the month of July 2016?
+     A = np.arange('2016-07', '2016-08', dtype='datetime64[D]')
+     print(A)
 
+#35 How to compute ((A+B)*(-A/2)) in place (without copy)?   
+     A = np.ones(3)*1
+     B = np.ones(3)*2
+     C = np.ones(3)*3
+     np.add(A,B,out=B)
+     np.divide(A,2,out=A)
+     np.negative(A,out=A)
+     np.multiply(A,B,out=A)   
 
+#36 Extract the integer part of a random array using 5 different method
+     
+#37 Create a 5x5 matrix with row values ranging from 0 to 4
+       a=np.zeros((5,5))
+       a=a+np.arange(5)
+       print(a)
 
+#38 Consider a generator function that generates 10 integers and use it to build an array
+      def generate(): 
+    for x in range(10):
+        yield x
+        
+A = np.fromiter(generate(),dtype=int)
+print (A)
 
-
+#39 Create a vector of size 10 with values ranging from 0 to 1, both excluded
+     A = np.linspace(0,1,12,endpoint=True)[1:-1]
+     print(A) 
+      
+#40  Create a random vector of size 10 and sort it       
+     a=np.random.random(10)
+     a.sort()
+     print(a)  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 
